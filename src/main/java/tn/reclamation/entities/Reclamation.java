@@ -57,14 +57,7 @@ public class Reclamation implements Serializable {
 	private Date sendingDate;
 	
 
-	
-	@Size(max=4000 , message="The total number of characters cannot be exceeded")
-	private String answerAdmin;
 
-	@Temporal(TemporalType.DATE)
-	private Date answerDate;
-	
-	private Boolean status;
 	
 	@ManyToOne
 	@JsonIgnore

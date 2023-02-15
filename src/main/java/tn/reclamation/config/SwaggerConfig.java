@@ -27,7 +27,7 @@ public class SwaggerConfig {
 	   .select()
 	   .apis(RequestHandlerSelectors.any())
 	   .paths(PathSelectors.any())
-	   .apis(RequestHandlerSelectors.basePackage("tn.food"))
+	   .apis(RequestHandlerSelectors.basePackage("tn.reclamation"))
 	   .build();
 	   }
 	 private ApiInfo apiInfo () {
