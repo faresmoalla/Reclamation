@@ -1,5 +1,7 @@
 package tn.reclamation.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ ReclamationRepository reclamationRepository;
 
 
 public Reclamation ajouterReclamation(Reclamation r) {
+	r.setEtat("non traitée");
 	return reclamationRepository.save(r);
 	
 }
@@ -33,7 +36,7 @@ public void supprimerReclamation(Long idReclamation) {
 public void updateReclamation(Reclamation reclamation, Long idReclamation) {
 	
 	Reclamation rec= reclamationRepository.findById(idReclamation).orElse(null);	
-	
+	rec.setEtat("non traitée");
 	rec.setIdRec(idReclamation);
 	rec.setContenuRec(reclamation.getContenuRec());
 	rec.setType(reclamation.getType());
@@ -46,6 +49,39 @@ public void updateReclamation(Reclamation reclamation, Long idReclamation) {
 public Reclamation getReclamationById(Long idReclamation) {
 	return reclamationRepository.getById(idReclamation);
 }
+
+
+public List<Reclamation> reclamationAujourdhui(){
+	Date currentSqlDate = new Date(System.currentTimeMillis());
+	List<Reclamation> listrec = reclamationRepository.findAll();
+	List<Reclamation> listrec2 = new ArrayList<>();
+
+	for (Reclamation r : listrec) {
+
+		if(r.getSendingDate().getYear()==(currentSqlDate.getYear())&& r.getSendingDate().getMonth()==(currentSqlDate.getMonth())
+				&&r.getSendingDate().getDay()==(currentSqlDate.getDay()) ){
+			listrec2.add(r);
+		}
+	}
+	return listrec2;
+	
+}
+public int nbrReclamationAujourdhui(){
+	Date currentSqlDate = new Date(System.currentTimeMillis());
+	List<Reclamation> listrec = reclamationRepository.findAll();
+	List<Reclamation> listrec2 = new ArrayList<>();
+int nombre = 0;
+	for (Reclamation r : listrec) {
+
+		if(r.getSendingDate().getYear()==(currentSqlDate.getYear())&& r.getSendingDate().getMonth()==(currentSqlDate.getMonth())
+				&&r.getSendingDate().getDay()==(currentSqlDate.getDay()) ){
+			nombre++;
+		}
+	}
+	return nombre;
+	
+}
+
 
 	
 }

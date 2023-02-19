@@ -55,6 +55,19 @@ public void modifierReclamation(@RequestBody Reclamation r,@PathVariable("idRecl
 public Reclamation getReclamationByiD(@PathVariable("idReclamation") Long idReclamation){
 	return reclamationService.getReclamationById(idReclamation);
 }
+@GetMapping("/ReclamationAujourdhui")
+@ResponseBody
+public List<Reclamation> ReclamationAujourdhui(){
+	return reclamationService.reclamationAujourdhui();
+}
+
+
+@GetMapping("/nombresReclamationAujourdhui")
+@ResponseBody
+public int nombresReclamationAujourdhui(){
+	return reclamationService.nbrReclamationAujourdhui();
+}
+
 
 
 }

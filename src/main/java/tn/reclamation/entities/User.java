@@ -53,5 +53,5 @@ public class User implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	@JsonIgnore
-	private Set<Reclamation> reclamations;
+	private List<Reclamation> reclamations;
 }

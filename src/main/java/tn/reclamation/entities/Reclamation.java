@@ -2,6 +2,7 @@ package tn.reclamation.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
@@ -57,11 +59,18 @@ public class Reclamation implements Serializable {
 	private Date sendingDate;
 	
 
-
+	private String etat;
 	
 	@ManyToOne
 	@JsonIgnore
     private User user;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "reclamation")
+	@JsonIgnore
+	private List<Response> responses;
+	
+	
 	
 
 }
