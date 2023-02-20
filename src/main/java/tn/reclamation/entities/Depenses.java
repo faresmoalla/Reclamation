@@ -30,9 +30,9 @@ public class Depenses implements Serializable {
  
 	private Long idDepense;
 	
-	private float eau;
-	private float electricite;
-	private float maintenance ;
+	private float Consommationeau;
+	private float Consommationelectricite;
+	private float maintenanceRestaurant ;
 	private float salaireProf;
 	
 
