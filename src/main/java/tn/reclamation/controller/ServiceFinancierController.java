@@ -54,4 +54,11 @@ public class ServiceFinancierController {
 	public ServiceFinancier getServiceFinancier(@PathVariable("idServiceFinancier") Long idServiceFinancier){
 		return serviceFinancierService.getSFbyId(idServiceFinancier);
 	}
+	
+	
+	@GetMapping("/getEtatFinance")
+	@ResponseBody
+	public float  getEtatFinance(){
+		return serviceFinancierService.EtatFinance();
+	}
 }

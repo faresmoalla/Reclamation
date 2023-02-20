@@ -49,7 +49,7 @@ public void updateDepenses(Depenses depenses, Long idDepenses) {
 
 
 public Depenses getDepensesById(Long idDepenses) {
-	return depenseRepository.getById(idDepenses);
+	return depenseRepository.findById(idDepenses).orElse(null);	
 }
 
 

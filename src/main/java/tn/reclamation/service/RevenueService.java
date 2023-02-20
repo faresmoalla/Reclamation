@@ -47,7 +47,7 @@ public void updateRevenus(Revenus Revenus, Long idRevenus) {
 
 
 public Revenus getrevenusServiceById(Long idRevenus) {
-	return revenueRepository.getById(idRevenus);
+	return revenueRepository.findById(idRevenus).orElse(null);
 }
 
 	

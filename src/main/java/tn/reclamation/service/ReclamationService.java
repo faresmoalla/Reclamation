@@ -47,7 +47,7 @@ public void updateReclamation(Reclamation reclamation, Long idReclamation) {
 
 
 public Reclamation getReclamationById(Long idReclamation) {
-	return reclamationRepository.getById(idReclamation);
+	return reclamationRepository.findById(idReclamation).orElse(null);	
 }
 
 
