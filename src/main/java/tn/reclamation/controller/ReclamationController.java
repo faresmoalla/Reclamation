@@ -28,7 +28,7 @@ ReclamationService reclamationService;
 @ResponseBody
 public void addReclamation(@RequestBody Reclamation r)
 {
-	return  reclamationService.ajouterReclamation(r);
+	  reclamationService.ajouterReclamation(r);
 
 }
 

@@ -3,7 +3,8 @@ package tn.reclamation.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,8 @@ public class ReclamationService {
 ReclamationRepository reclamationRepository;
 @Autowired
 DictionnaireRepository badwordsRepo;
-
+@Autowired
+JavaMailSender javaMailSender;
 public void ajouterReclamation(Reclamation r) {
 	List<String> badwords1 = new ArrayList<String>();
 	List<DictionnaireBadWords> badwords = badwordsRepo.findAll();
@@ -36,7 +38,14 @@ public void ajouterReclamation(Reclamation r) {
 	else if(verif(r) == 0) {
 		r.setContenuRec("*******");
 		 reclamationRepository.save(r);
+			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+			simpleMailMessage.setFrom("schoolesprit1@gmail.com");
+			//simpleMailMessage.setTo(r.getUser().getEmailUser());
 
+			simpleMailMessage.setTo("fares.moalla@esprit.tn");
+			simpleMailMessage.setSubject("This is an alert, you have sent a bad word");
+			simpleMailMessage.setText("This is an alert, you have sent a bad word, if you keep sending bad words, you might get banned");
+			javaMailSender.send(simpleMailMessage);
 	}
 
 	
