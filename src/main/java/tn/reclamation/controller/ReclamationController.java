@@ -26,7 +26,7 @@ ReclamationService reclamationService;
 
 @PostMapping("/add-reclamation")
 @ResponseBody
-public Reclamation addReclamation(@RequestBody Reclamation r)
+public void addReclamation(@RequestBody Reclamation r)
 {
 	return  reclamationService.ajouterReclamation(r);
 
