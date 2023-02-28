@@ -1,5 +1,6 @@
 package tn.reclamation.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +57,9 @@ public class ServiceFinancierController {
 	}
 	
 	
-	@GetMapping("/getEtatFinance")
+	@PutMapping("/getEtatFinance")
 	@ResponseBody
-	public float  getEtatFinance(){
-		return serviceFinancierService.EtatFinance();
+	public float getEtatFinance( ){
+		return serviceFinancierService.EtatFinanceByYear();
 	}
 }

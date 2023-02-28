@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ ReclamationRepository reclamationRepository;
 DictionnaireRepository badwordsRepo;
 @Autowired
 JavaMailSender javaMailSender;
+
 public void ajouterReclamation(Reclamation r) {
 	List<String> badwords1 = new ArrayList<String>();
 	List<DictionnaireBadWords> badwords = badwordsRepo.findAll();
@@ -37,12 +39,14 @@ public void ajouterReclamation(Reclamation r) {
 	}
 	else if(verif(r) == 0) {
 		r.setContenuRec("*******");
+		
+		r.setEtat("non traitée");
 		 reclamationRepository.save(r);
 			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 			simpleMailMessage.setFrom("schoolesprit1@gmail.com");
 			//simpleMailMessage.setTo(r.getUser().getEmailUser());
 
-			simpleMailMessage.setTo("fares.moalla@esprit.tn");
+			simpleMailMessage.setTo("hajer.moumni@esprit.tn");
 			simpleMailMessage.setSubject("This is an alert, you have sent a bad word");
 			simpleMailMessage.setText("This is an alert, you have sent a bad word, if you keep sending bad words, you might get banned");
 			javaMailSender.send(simpleMailMessage);
@@ -125,6 +129,14 @@ int nombre = 0;
 	
 }
 
+
+
+//@Schedulet mta3 l3am
+// mta3 draj
+@Scheduled(fixedRate = 10000)
+public void afficherMessage() {
+	// nvprix =prixInscriptionCetteAnnee + prixInscriptionCetteAnnee*0.05;
+}
 
 	
 }

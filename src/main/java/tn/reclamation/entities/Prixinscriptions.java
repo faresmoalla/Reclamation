@@ -1,15 +1,16 @@
 package tn.reclamation.entities;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,21 +22,21 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServiceFinancier {
+public class  Prixinscriptions implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(name="idF")  
-	private Long idF;
+	private Long idPrix; 
+	
+	private float prixScolarité;
+	
+	private float prixAbonnementRestaurant;
+	private float prixAbonnementFoyer;
 	
 	
-	
-	private float TotaleDepenses;
-	
-
-	
-	private float TotaleRevenues;
-	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyy-MM-dd")
+	private Date date;
 	
 	
 }

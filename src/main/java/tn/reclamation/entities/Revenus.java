@@ -28,11 +28,19 @@ public class Revenus implements Serializable  {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long idRevenue; 
 	
+	private float prixInscription = 7300;
+	
 	private float scolariteEtud;
 	
+	
 	private float abonnementRestaurant;
+	
 	private float abonnementFoyer;
 	
 	private float projets;
 	
+	
 }
+
+
+

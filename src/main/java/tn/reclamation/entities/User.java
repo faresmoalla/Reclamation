@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +34,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -46,11 +49,13 @@ public class User implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyy-MM-dd")
 	private Date dateNaissance;
-	
-	
+
+
 	private String numTel ;
 	private String adresse;
 	
+	private Boolean abonneRestaurant;
+	private Boolean abonneFoyer;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	@JsonIgnore
 	private List<Reclamation> reclamations;

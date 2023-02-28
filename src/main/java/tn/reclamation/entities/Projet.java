@@ -1,7 +1,7 @@
 package tn.reclamation.entities;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,21 +21,20 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServiceFinancier {
+public class Projet {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(name="idF")  
-	private Long idF;
+
+	private Long idProjet; 
+	
+	private float prixProjet;
+	
+	private String name;
+	private String technologies ;
+	private String classe; 
 	
 	
-	
-	private float TotaleDepenses;
 	
 
-	
-	private float TotaleRevenues;
-	
-	
-	
 }
