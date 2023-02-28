@@ -109,6 +109,7 @@ PrixinscriptionsRepository prixRepository;
 	
 	
 	@Scheduled(fixedRate = 1000)
+	//@Scheduled(cron = "* * * * */12 *")
 	private void AugmenterPrixScolarité() {
 		Date currentSqlDate = new Date(System.currentTimeMillis());
 		Prixinscriptions prix = new Prixinscriptions();
@@ -125,7 +126,6 @@ PrixinscriptionsRepository prixRepository;
 		
 		prixRepository.save(prix);
 
-			System.out.println(prix.getPrixScolarité());
 	}
 	
 
