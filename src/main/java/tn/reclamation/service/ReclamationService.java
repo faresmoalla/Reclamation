@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ ReclamationRepository reclamationRepository;
 DictionnaireRepository badwordsRepo;
 @Autowired
 JavaMailSender javaMailSender;
+@Autowired
+PasswordEncoder passwordencoder;
+
 
 public void ajouterReclamation(Reclamation r) {
 	List<String> badwords1 = new ArrayList<String>();
@@ -38,7 +42,11 @@ public void ajouterReclamation(Reclamation r) {
 	 reclamationRepository.save(r);
 	}
 	else if(verif(r) == 0) {
-		r.setContenuRec("*******");
+		String encodedPass = passwordencoder.encode(r.getContenuRec());
+		
+		
+		
+		r.setContenuRec(encodedPass);
 		
 		r.setEtat("non traitée");
 		 reclamationRepository.save(r);
@@ -131,12 +139,21 @@ int nombre = 0;
 
 
 
-//@Schedulet mta3 l3am
-// mta3 draj
-@Scheduled(fixedRate = 10000)
-public void afficherMessage() {
-	// nvprix =prixInscriptionCetteAnnee + prixInscriptionCetteAnnee*0.05;
-}
 
+
+public List<Reclamation> listerReclamationParDateDonnéé(Date d1) {
+
+	List<Reclamation>  l1 = new ArrayList<>();
+	List<Reclamation>  listreclamation = reclamationRepository.findAll();
+	for (Reclamation r : listreclamation ) {
+		if (r.getSendingDate().equals(d1.getDate())) {
+			l1.add(r);
+		}
+	}
+return listreclamation;
+
+
+
+}
 	
 }

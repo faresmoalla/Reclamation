@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 
 import tn.reclamation.entities.Depenses;
 import tn.reclamation.entities.Prixinscriptions;
+import tn.reclamation.entities.Projet;
 import tn.reclamation.entities.Revenus;
 import tn.reclamation.entities.ServiceFinancier;
 import tn.reclamation.entities.User;
 import tn.reclamation.repository.DepenseRepository;
 import tn.reclamation.repository.PrixinscriptionsRepository;
+import tn.reclamation.repository.ProjetRepository;
 import tn.reclamation.repository.RevenueRepository;
 import tn.reclamation.repository.ServiceFinancierRepository;
 import tn.reclamation.repository.UserRepository;
@@ -27,6 +29,9 @@ public class ServiceFinancierService {
 DepenseRepository depenseRepo;
 @Autowired
 RevenueRepository revenuRepo;
+
+@Autowired
+ProjetRepository projetRepo;
 
 @Autowired
 UserRepository userRepo;
@@ -70,11 +75,12 @@ PrixinscriptionsRepository prixRepository;
 		List<Depenses> listdepenses = depenseRepo.findAll();
 		float sommeDepense=0;
 		float sommeRevenus=0;
-	
+		float sommeprojets=0;
 		int nbrAbonnéRestau=0;
 		int nbrAbonnéFoyer=0;
 		List<User> listuser = userRepo.findAll();
 		List<Prixinscriptions> prixinscriptions = prixRepository.findAll();
+		List<Projet> projets = projetRepo.findAll();
 		
 		Prixinscriptions prix = new Prixinscriptions();
 		
@@ -83,8 +89,11 @@ PrixinscriptionsRepository prixRepository;
 				prix = p;
 			}
 		}
-
-		
+		for (Projet p : projets) {
+			sommeprojets+= p.getPrixProjet();
+			
+			}
+		System.out.println("/////////"+sommeprojets);
 		for (User u : listuser) {
 			if(u.getAbonneRestaurant().booleanValue()) {
 				nbrAbonnéRestau++;
@@ -94,7 +103,7 @@ PrixinscriptionsRepository prixRepository;
 			}
 		}
 			sommeRevenus+=listuser.size()*prix.getPrixScolarité()+nbrAbonnéFoyer*prix.getPrixAbonnementFoyer()+
-					nbrAbonnéRestau*prix.getPrixAbonnementRestaurant();
+					nbrAbonnéRestau*prix.getPrixAbonnementRestaurant() + sommeprojets;
 	
 		for(Depenses d :listdepenses) {
 			sommeDepense+= d.getConsommationeau()+d.getConsommationelectricite()+d.getMaintenanceRestaurant()+d.getSalaireProf();
@@ -108,7 +117,7 @@ PrixinscriptionsRepository prixRepository;
 	
 	
 	
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(fixedRate = 10000)
 	//@Scheduled(cron = "* * * * */12 *")
 	private void AugmenterPrixScolarité() {
 		Date currentSqlDate = new Date(System.currentTimeMillis());

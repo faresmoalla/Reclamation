@@ -1,8 +1,10 @@
 package tn.reclamation.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,6 +56,12 @@ public void modifierReclamation(@RequestBody Reclamation r,@PathVariable("idRecl
 @ResponseBody
 public Reclamation getReclamationByiD(@PathVariable("idReclamation") Long idReclamation){
 	return reclamationService.getReclamationById(idReclamation);
+}
+
+@GetMapping("/getReclamationByDate/{datedate}")
+@ResponseBody
+public List<Reclamation> listerReclamationbydate(@PathVariable("datedate") Date datedate){
+	return reclamationService.listerReclamationParDateDonnéé(datedate);
 }
 @GetMapping("/ReclamationAujourdhui")
 @ResponseBody
